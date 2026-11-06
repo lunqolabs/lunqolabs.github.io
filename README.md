@@ -4,8 +4,30 @@ La racine du domaine `lunqolabs.github.io`. Elle sert deux choses.
 
 ## `index.html` — la page d'accueil de Lunqo Labs
 
-Elle présente **Undersnake** et **Backspace**, et donne pour chacun son lien Google Play. Pour
-Undersnake elle propose aussi la version web, sur `undersnake.lunqolabs.com`.
+**Undersnake** occupe le haut de page : c'est le produit qu'on pousse, et c'est ici qu'atterrit le
+trafic payant. En dessous viennent les autres produits du studio, repris de `lunqolabs.com` avec
+leur visuel et leur description : Backspace, Orbgrid, Valorio, puis ShotOrbi, Nova Rush et PDFQuill
+annoncés comme à venir. Chaque carte renvoie à la fiche détaillée sur le site, et au Play Store
+quand l'app y est publiée.
+
+### Cinq langues, une seule page
+
+La page est traduite en français, anglais, espagnol, portugais et italien — les mêmes langues que
+`lunqolabs.com`. Pas de build ni de redirection : un dictionnaire dans `index.html` remplit les
+éléments portant `data-t`, et les liens vers le site sont reconstruits à partir du chemin de
+chaque langue (`/fr/realisations`, `/en/work`, `/es/proyectos`, `/pt/projetos`, `/it/progetti`).
+
+La langue est choisie dans cet ordre : `?lang=xx` dans l'URL, puis le choix mémorisé dans
+`localStorage`, puis `navigator.languages`, et l'anglais en dernier recours. Les captures suivent
+la langue quand elles existent dans cette langue — `img/undersnake-pt-01.webp`, `img/orbgrid-it-01.webp` —
+et retombent sur l'anglais sinon.
+
+### Les images
+
+Dans `img/`. Celles des produits du studio viennent de `lunqolabs.com/uploads/projects/`, celles
+d'Undersnake sont les captures de la fiche Play redimensionnées en 720 × 1280. Elles sont copiées
+ici plutôt qu'appelées à distance : une page de destination publicitaire ne doit pas dépendre d'un
+autre hôte pour s'afficher.
 
 Cette page n'est pas décorative, elle a trois emplois :
 
@@ -16,6 +38,8 @@ Cette page n'est pas décorative, elle a trois emplois :
    diffusion. Elle accepte en revanche un site ordinaire, d'où ce détour : la publicité mène ici,
    le bouton mène à Play.
 3. **L'hôte d'`app-ads.txt`** (voir plus bas), parce que les robots remontent à la racine.
+
+Le nom « Lunqo Labs », en haut de page, renvoie au site du studio dans la langue affichée.
 
 Les liens Play portent un paramètre `referrer` tracé (`utm_source=lunqolabs`, `utm_medium=site`),
 distinct de celui des publicités : Play Console sépare ainsi les installations venues de cette page

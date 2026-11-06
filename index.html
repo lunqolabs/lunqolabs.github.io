@@ -3,107 +3,527 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Lunqo Labs — Undersnake et Backspace</title>
-<meta name="description" content="Lunqo Labs fabrique de petits jeux et outils pour Android. Undersnake : un serpent qui creuse, 24 mondes, 480 niveaux, hors ligne.">
+<title>Lunqo Labs — Undersnake, Backspace et nos autres produits</title>
+<meta name="description" content="Lunqo Labs, studio indépendant : web apps, applis mobiles et jeux vidéo. Undersnake est sur Google Play.">
 <meta name="theme-color" content="#0d1020">
-<link rel="icon" href="data:,">
+<link rel="icon" href="img/lunqo-icon.svg" type="image/svg+xml">
+<link rel="canonical" href="https://lunqolabs.github.io/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Lunqo Labs">
+<meta property="og:title" content="Undersnake — un serpent qui creuse">
+<meta property="og:description" content="24 mondes, 480 niveaux et une descente sans fond. Sur Google Play.">
+<meta property="og:url" content="https://lunqolabs.github.io/">
+<meta property="og:image" content="https://lunqolabs.github.io/img/og-undersnake.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=Hanken+Grotesk:wght@400;500;600;700&display=swap">
 <style>
-  :root{
-    --fond:#0d1020; --carte:#161a2e; --bord:#262c48;
-    --encre:#eef0f8; --encre2:#a2a8c4; --vif:#c6f24a; --or:#ffd15c;
-  }
-  *{box-sizing:border-box}
-  body{
-    margin:0; background:var(--fond); color:var(--encre);
-    font:16px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
-    -webkit-font-smoothing:antialiased;
-  }
-  .page{max-width:760px; margin:0 auto; padding:40px 16px 64px}
-  header{margin-bottom:40px}
-  .marque{font-size:14px; letter-spacing:.14em; text-transform:uppercase; color:var(--encre2); margin:0 0 6px}
-  h1{font-size:clamp(28px,7vw,40px); line-height:1.15; margin:0 0 10px}
-  .sous{color:var(--encre2); margin:0; max-width:52ch}
-  .jeu{
-    background:var(--carte); border:1px solid var(--bord); border-radius:18px;
-    padding:24px; margin:0 0 20px;
-  }
-  .jeu h2{font-size:clamp(22px,5vw,28px); margin:0 0 4px}
-  .tag{font-size:13px; letter-spacing:.1em; text-transform:uppercase; color:var(--vif); margin:0 0 12px}
-  .jeu p{margin:0 0 14px; color:var(--encre2)}
-  .jeu p strong{color:var(--encre); font-weight:600}
-  ul{margin:0 0 18px; padding-left:20px; color:var(--encre2)}
-  li{margin:4px 0}
-  .actions{display:flex; flex-wrap:wrap; gap:10px; margin-top:18px}
-  .btn{
-    display:inline-block; padding:13px 22px; border-radius:999px; text-decoration:none;
-    font-weight:700; font-size:15px; border:1px solid transparent;
-  }
-  .btn--play{background:var(--vif); color:#101401}
-  .btn--play:hover{filter:brightness(1.08)}
-  .btn--sec{background:transparent; color:var(--encre); border-color:var(--bord)}
-  .btn--sec:hover{border-color:var(--encre2)}
-  footer{margin-top:44px; padding-top:22px; border-top:1px solid var(--bord); color:var(--encre2); font-size:14px}
-  footer a{color:var(--encre2)}
-  .tech{margin-top:14px; font-size:13px; line-height:1.55; color:#767c9a}
-  .tech code{background:#11142a; padding:1px 5px; border-radius:5px; font-size:12px}
-  @media (prefers-reduced-motion:no-preference){ .btn{transition:filter .15s, border-color .15s} }
+:root{
+  --night-950:#0a0c14; --night-900:#0d1020; --night-800:#141830; --night-700:#1c2140; --night-600:#2a3056;
+  --paper:#f4f3fa; --mist:#b9b8d3; --fog:#8c8baa; --muted:#6e7196;
+  --indigo-500:#7f77dd; --indigo-300:#b4aff0;
+  --ember-400:#ff9e5e; --ember-300:#ffb27f;
+  --cat-web:#9c95ea; --cat-mobile:#5cc8e6; --cat-game:#f28ac4;
+  --display:"Bricolage Grotesque","Hanken Grotesk",system-ui,sans-serif;
+  --body:"Hanken Grotesk",system-ui,-apple-system,sans-serif;
+  --card:20px; --pill:999px;
+  --gut:24px; --max:1120px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0; background:var(--night-900); color:var(--paper);
+  font:400 17px/1.6 var(--body); -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+body::before{
+  content:""; position:fixed; inset:0; pointer-events:none; z-index:0;
+  background:
+    radial-gradient(60vw 48vw at 78% -8%, #7f77dd26, transparent 62%),
+    radial-gradient(48vw 40vw at 4% 8%, #ff9e5e14, transparent 60%);
+}
+.wrap{position:relative; z-index:1; max-width:var(--max); margin:0 auto; padding:0 16px}
+a{color:inherit}
+img{display:block; max-width:100%; height:auto}
+h1,h2,h3{font-family:var(--display); font-weight:700; letter-spacing:-.02em; margin:0}
+
+/* ---------- barre ---------- */
+.bar{display:flex; align-items:center; justify-content:space-between; gap:16px; padding:22px 0 10px}
+.marque{display:inline-flex; align-items:center; gap:10px; text-decoration:none}
+.marque img{height:26px; width:auto}
+.marque span{font-family:var(--display); font-weight:700; font-size:17px; letter-spacing:-.01em}
+.marque:hover span{color:var(--indigo-300)}
+.langues{display:flex; gap:2px; background:#ffffff0a; border:1px solid var(--night-700); border-radius:var(--pill); padding:3px}
+.langues button{
+  font:600 12px/1 var(--body); letter-spacing:.06em; text-transform:uppercase;
+  color:var(--fog); background:none; border:0; padding:8px 10px; border-radius:var(--pill); cursor:pointer;
+}
+.langues button:hover{color:var(--paper)}
+.langues button[aria-current="true"]{background:var(--indigo-500); color:#fff}
+
+/* ---------- héros ---------- */
+.hero{display:grid; grid-template-columns:1fr; gap:36px; padding:48px 0 16px; align-items:center}
+.over{font:600 12px/1 var(--body); letter-spacing:.16em; text-transform:uppercase; color:var(--ember-400); margin:0 0 14px}
+.hero h1{font-size:clamp(2.6rem,8vw,4.2rem); line-height:.98}
+.hero .lead{font-size:clamp(1.15rem,2.4vw,1.45rem); color:var(--paper); margin:18px 0 10px; max-width:24ch; font-weight:500}
+.hero .sub{color:var(--mist); margin:0; max-width:46ch}
+.chiffres{display:flex; flex-wrap:wrap; gap:10px; margin:22px 0 0; padding:0; list-style:none}
+.chiffres li{font:600 13px/1 var(--body); color:var(--mist); background:#ffffff0a; border:1px solid var(--night-700); border-radius:var(--pill); padding:9px 14px}
+.actions{display:flex; flex-wrap:wrap; gap:12px; margin-top:26px}
+.btn{display:inline-flex; align-items:center; gap:9px; padding:14px 24px; border-radius:var(--pill);
+  text-decoration:none; font:700 15px/1 var(--body); border:1px solid transparent; transition:transform .15s,filter .15s,border-color .15s,background .15s}
+.btn:hover{transform:translateY(-1px)}
+.btn--play{background:var(--ember-400); color:#1a0d04; box-shadow:0 10px 30px -8px #ff9e5e8c}
+.btn--play:hover{filter:brightness(1.06)}
+.btn--ghost{background:#ffffff0a; color:var(--paper); border-color:var(--night-600)}
+.btn--ghost:hover{border-color:var(--indigo-500); background:#7f77dd1f}
+.btn svg{width:17px; height:17px; flex:none}
+
+.telephones{display:flex; gap:14px; justify-content:center}
+.tel{
+  width:min(44%,218px); border-radius:22px; overflow:hidden;
+  border:1px solid var(--night-600); background:var(--night-800);
+  box-shadow:0 24px 60px -22px #000c;
+}
+.tel:nth-child(2){transform:translateY(22px)}
+
+/* ---------- sections ---------- */
+section.bloc{padding:64px 0 8px}
+.titre2{font-size:clamp(1.8rem,4vw,2.6rem); line-height:1.08; margin:0 0 8px}
+.chapo{color:var(--mist); margin:0 0 30px; max-width:58ch}
+
+.grille{display:grid; grid-template-columns:1fr; gap:18px}
+.carte{
+  display:flex; flex-direction:column; background:var(--night-800);
+  border:1px solid var(--night-700); border-radius:var(--card); overflow:hidden;
+  transition:border-color .18s, transform .18s;
+}
+.carte:hover{border-color:var(--night-600); transform:translateY(-2px)}
+.carte figure{margin:0; background:var(--night-950); display:flex; justify-content:center; padding:20px 20px 0}
+.carte figure img{width:100%; max-width:188px; border-radius:12px 12px 0 0; border:1px solid var(--night-700); border-bottom:0}
+.carte .corps{padding:20px 22px 22px; display:flex; flex-direction:column; flex:1}
+.cat{font:600 11px/1 var(--body); letter-spacing:.14em; text-transform:uppercase; margin:0 0 8px}
+.cat--mobile{color:var(--cat-mobile)} .cat--game{color:var(--cat-game)} .cat--web{color:var(--cat-web)}
+.carte h3{font-size:1.35rem; margin:0 0 8px}
+.carte p{margin:0 0 16px; color:var(--mist); font-size:15.5px; flex:1}
+.liens{display:flex; flex-wrap:wrap; gap:8px}
+.lien{
+  font:600 13.5px/1 var(--body); text-decoration:none; color:var(--paper);
+  border:1px solid var(--night-600); background:#ffffff08; border-radius:var(--pill); padding:10px 15px;
+}
+.lien:hover{border-color:var(--indigo-500); background:#7f77dd1f}
+.lien--fort{background:var(--indigo-500); border-color:var(--indigo-500); color:#fff}
+.lien--fort:hover{filter:brightness(1.08); background:var(--indigo-500)}
+.badge{display:inline-block; font:700 10.5px/1 var(--body); letter-spacing:.14em; text-transform:uppercase;
+  color:var(--night-900); background:var(--ember-300); border-radius:5px; padding:5px 8px; margin-left:8px; vertical-align:middle}
+
+.grille--soon .carte figure img{opacity:.72}
+
+/* ---------- studio ---------- */
+.studio{
+  margin:64px 0 0; padding:34px; border-radius:28px;
+  background:linear-gradient(135deg,#1c2140,#141830);
+  border:1px solid var(--night-600);
+}
+.studio h2{font-size:clamp(1.5rem,3.4vw,2.1rem); margin:0 0 10px}
+.studio p{color:var(--mist); margin:0 0 22px; max-width:56ch}
+
+/* ---------- pied ---------- */
+footer{margin-top:64px; padding:28px 0 56px; border-top:1px solid var(--night-700); color:var(--fog); font-size:14.5px}
+footer a{color:var(--mist)}
+footer p{margin:0 0 12px}
+.tech{font-size:13px; line-height:1.6; color:var(--muted); max-width:72ch}
+.tech code{background:#ffffff0d; padding:1px 6px; border-radius:5px; font-size:12px; font-family:ui-monospace,SFMono-Regular,monospace}
+
+@media (min-width:720px){
+  .grille{grid-template-columns:repeat(2,1fr)}
+}
+@media (min-width:980px){
+  .wrap{padding:0 var(--gut)}
+  .hero{grid-template-columns:1.1fr .9fr; gap:48px; padding:72px 0 24px}
+  .telephones{justify-content:flex-end}
+  .tel{width:min(46%,240px)}
+  .grille{grid-template-columns:repeat(3,1fr)}
+}
+@media (prefers-reduced-motion:reduce){
+  *{transition:none !important; scroll-behavior:auto}
+  .tel:nth-child(2){transform:none}
+}
 </style>
 </head>
 <body>
-<div class="page">
 
-  <header>
-    <p class="marque">Lunqo Labs</p>
-    <h1>De petits jeux, faits par deux personnes.</h1>
-    <p class="sous">Pensés pour les temps morts : une partie tient en une minute, et tout marche sans connexion.</p>
+<div class="wrap">
+
+  <header class="bar">
+    <a class="marque" id="lienMarque" href="https://lunqolabs.com/fr">
+      <img src="img/lunqo-icon.svg" alt="" width="26" height="26">
+      <span>Lunqo&nbsp;Labs</span>
+    </a>
+    <nav class="langues" id="langues" aria-label="Langue"></nav>
   </header>
 
-  <section class="jeu">
-    <p class="tag">Jeu · Arcade · Android</p>
-    <h2>Undersnake</h2>
-    <p><strong>Tu ne manges pas de pommes. Tu creuses.</strong> Un serpent qui descend, et derrière lui
-       une coulée qui se déverse dans les tunnels qu'il vient d'ouvrir. Creuse tout droit et tu lui
-       offres une autoroute jusqu'à ta tête.</p>
-    <ul>
-      <li>24 mondes, 480 niveaux, et une descente infinie sans fond</li>
-      <li>Un classement de la semaine : tout le monde creuse le même puits</li>
-      <li>Cinq thèmes complets, chacun en Nuit et en Jour</li>
-      <li>Jamais de publicité pendant une partie</li>
-    </ul>
-    <div class="actions">
-      <a class="btn btn--play"
-         href="https://play.google.com/store/apps/details?id=com.lunqolabs.undersnake&amp;referrer=utm_source%3Dlunqolabs%26utm_medium%3Dsite%26utm_campaign%3Dpage-accueil">
-        Télécharger sur Google Play
-      </a>
-      <a class="btn btn--sec" href="https://undersnake.lunqolabs.com">Jouer dans le navigateur</a>
-    </div>
-  </section>
+  <main>
 
-  <section class="jeu">
-    <p class="tag">Utilitaire · Android</p>
-    <h2>Backspace</h2>
-    <p>Fait le ménage dans la pellicule : les captures d'écran, les doublons, les photos floues.
-       Ce qu'on garde par défaut et qu'on ne regarde jamais.</p>
-    <div class="actions">
-      <a class="btn btn--sec"
-         href="https://play.google.com/store/apps/details?id=com.lunqolabs.backspace&amp;referrer=utm_source%3Dlunqolabs%26utm_medium%3Dsite%26utm_campaign%3Dpage-accueil">
-        Voir sur Google Play
-      </a>
-    </div>
-  </section>
+    <section class="hero">
+      <div>
+        <p class="over" data-t="heroOver">Nouveau sur Google Play</p>
+        <h1>Undersnake</h1>
+        <p class="lead" data-t="heroLead">Un serpent qui creuse. La coulée te traque dans tes propres tunnels.</p>
+        <p class="sub" data-t="heroSub">Tu ne manges pas de pommes : tu descends. Et derrière toi, la coulée se déverse dans les tunnels que tu viens d'ouvrir.</p>
+        <ul class="chiffres">
+          <li data-t="n1">24 mondes</li>
+          <li data-t="n2">480 niveaux</li>
+          <li data-t="n3">Descente infinie</li>
+          <li data-t="n4">Jouable hors ligne</li>
+        </ul>
+        <div class="actions">
+          <a class="btn btn--play" id="playUndersnake"
+             href="https://play.google.com/store/apps/details?id=com.lunqolabs.undersnake&amp;referrer=utm_source%3Dlunqolabs%26utm_medium%3Dsite%26utm_campaign%3Dpage-accueil">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3.6 1.8a1 1 0 0 0-.5.9v18.6a1 1 0 0 0 .5.9l10-9.9-10-10.5Zm11.2 11 2.9 2.9-10.9 6.2 8-9.1Zm0-2.2-8-9 10.9 6.2-2.9 2.8Zm1.4 1.1 3.3-3.2c.6.4 1 .9 1 1.6s-.4 1.2-1 1.6l-3.3 3.2-1.6-1.6 1.6-1.6Z"/></svg>
+            <span data-t="btnPlay">Télécharger sur Google Play</span>
+          </a>
+          <a class="btn btn--ghost" href="https://undersnake.lunqolabs.com">
+            <span data-t="btnWeb">Jouer dans le navigateur</span>
+          </a>
+        </div>
+      </div>
+      <div class="telephones">
+        <img class="tel" data-img="undersnake" data-n="01" src="img/undersnake-en-01.webp" width="720" height="1280" alt="Undersnake" loading="eager" decoding="async">
+        <img class="tel" data-img="undersnake" data-n="02" src="img/undersnake-en-02.webp" width="720" height="1280" alt="Undersnake" loading="eager" decoding="async">
+      </div>
+    </section>
+
+    <section class="bloc" id="produits">
+      <p class="over" data-t="secProdOver">Nos produits</p>
+      <h2 class="titre2" data-t="secProdTitre">Des produits utilisés tous les jours.</h2>
+      <p class="chapo" data-t="secProdChapo">Chaque projet a sa page sur le site du studio : le défi de départ, ce qu'on a construit, et ce que ça a changé.</p>
+
+      <div class="grille">
+
+        <article class="carte">
+          <figure><img data-img="backspace" data-n="01" data-langs="fr,en" src="img/backspace-en-01.webp" width="720" height="1280" alt="Backspace" loading="lazy" decoding="async"></figure>
+          <div class="corps">
+            <p class="cat cat--mobile" data-t="catMobile">Appli mobile</p>
+            <h3>Backspace</h3>
+            <p data-t="dBackspace">Libérez de l'espace en un swipe. Le nettoyage photo qui prend des minutes, pas des soirées.</p>
+            <div class="liens">
+              <a class="lien lien--fort" href="https://play.google.com/store/apps/details?id=com.lunqolabs.backspace&amp;referrer=utm_source%3Dlunqolabs%26utm_medium%3Dsite%26utm_campaign%3Dpage-accueil" data-t="lienPlay">Google Play</a>
+              <a class="lien" data-site="backspace" href="https://lunqolabs.com/fr/realisations/backspace" data-t="lienProjet">Voir le projet</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="carte">
+          <figure><img data-img="orbgrid" data-n="01" src="img/orbgrid-en-01.webp" width="720" height="1280" alt="Orbgrid" loading="lazy" decoding="async"></figure>
+          <div class="corps">
+            <p class="cat cat--game" data-t="catGame">Jeu vidéo</p>
+            <h3>Orbgrid</h3>
+            <p data-t="dOrbgrid">Conquiers la grille. Un jeu de stratégie à réactions en chaîne, en solo ou jusqu'à 4 joueurs.</p>
+            <div class="liens">
+              <a class="lien lien--fort" href="https://play.google.com/store/apps/details?id=com.orbgrid.game" data-t="lienPlay">Google Play</a>
+              <a class="lien" href="https://orbgrid.lunqolabs.com" data-t="lienJouer">Jouer en ligne</a>
+              <a class="lien" data-site="orbgrid" href="https://lunqolabs.com/fr/realisations/orbgrid" data-t="lienProjet">Voir le projet</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="carte">
+          <figure><img src="img/valorio-m-01.webp" width="720" height="1280" alt="Valorio" loading="lazy" decoding="async"></figure>
+          <div class="corps">
+            <p class="cat cat--web" data-t="catWeb">Web app</p>
+            <h3>Valorio</h3>
+            <p data-t="dValorio">RH, présence à la demi-journée, TJM, facturation et marges : tout ce que gérait un Google Sheet, fiabilisé et automatisé.</p>
+            <div class="liens">
+              <a class="lien" data-site="valorio" href="https://lunqolabs.com/fr/realisations/valorio" data-t="lienProjet">Voir le projet</a>
+            </div>
+          </div>
+        </article>
+
+      </div>
+    </section>
+
+    <section class="bloc">
+      <p class="over" data-t="secSoonOver">Bientôt</p>
+      <h2 class="titre2" data-t="secSoonTitre">Ce qui arrive sur vos téléphones.</h2>
+      <p class="chapo" data-t="secSoonChapo">Trois produits en cours, déjà jouables ou utilisables en interne.</p>
+
+      <div class="grille grille--soon">
+
+        <article class="carte">
+          <figure><img src="img/so-m-01.webp" width="720" height="1280" alt="ShotOrbi" loading="lazy" decoding="async"></figure>
+          <div class="corps">
+            <p class="cat cat--game"><span data-t="catGame">Jeu vidéo</span><span class="badge" data-t="soon">Bientôt</span></p>
+            <h3>ShotOrbi</h3>
+            <p data-t="dShotOrbi">Vise, rebondis sur les parois et touche toutes les cibles avant la fin du chrono. Un jeu de puzzle, de tir et de temps.</p>
+            <div class="liens">
+              <a class="lien" data-site="shotorbi" href="https://lunqolabs.com/fr/realisations/shotorbi" data-t="lienProjet">Voir le projet</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="carte">
+          <figure><img src="img/nr-m-01.webp" width="720" height="1280" alt="Nova Rush" loading="lazy" decoding="async"></figure>
+          <div class="corps">
+            <p class="cat cat--game"><span data-t="catGame">Jeu vidéo</span><span class="badge" data-t="soon">Bientôt</span></p>
+            <h3>Nova Rush</h3>
+            <p data-t="dNovaRush">Un jeu d'arcade spatial : touche les éclats, gemmes et bonus avant qu'ils filent, monde après monde.</p>
+            <div class="liens">
+              <a class="lien" data-site="nova-rush" href="https://lunqolabs.com/fr/realisations/nova-rush" data-t="lienProjet">Voir le projet</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="carte">
+          <figure><img src="img/pq-m-01.webp" width="720" height="1280" alt="PDFQuill" loading="lazy" decoding="async"></figure>
+          <div class="corps">
+            <p class="cat cat--mobile"><span data-t="catMobile">Appli mobile</span><span class="badge" data-t="soon">Bientôt</span></p>
+            <h3>PDFQuill</h3>
+            <p data-t="dPdfQuill">Tous vos PDF dans votre poche : scanner, fusionner, alléger, signer. Hors ligne, rien n'est envoyé.</p>
+            <div class="liens">
+              <a class="lien" data-site="pdfquill" href="https://lunqolabs.com/fr/realisations/pdfquill" data-t="lienProjet">Voir le projet</a>
+            </div>
+          </div>
+        </article>
+
+      </div>
+    </section>
+
+    <section class="studio">
+      <h2 data-t="studioTitre">Studio indépendant : web apps, applis mobiles et jeux vidéo.</h2>
+      <p data-t="studioTexte">De la maquette à la publication sur les stores. Premier appel gratuit, réponse sous 24 h, et une estimation honnête.</p>
+      <div class="actions" style="margin-top:0">
+        <a class="btn btn--ghost" id="lienProjets" href="https://lunqolabs.com/fr/realisations" data-t="studioCta1">Voir tous les projets</a>
+        <a class="btn btn--ghost" id="lienDevis" href="https://lunqolabs.com/fr/devis" data-t="studioCta2">Demander un devis</a>
+      </div>
+    </section>
+
+  </main>
 
   <footer>
-    <p>Une question, un bug ? <a href="mailto:contact@lunqolabs.com">contact@lunqolabs.com</a> — on répond.</p>
-    <p class="tech">
-      Cette racine sert aussi <code>app-ads.txt</code>, le fichier qui dit aux annonceurs qui a le droit
-      de vendre l'inventaire publicitaire de nos applications. Les robots partent du site déclaré dans
-      la fiche Play Store puis remontent à la racine de l'hôte : seul un dépôt nommé d'après l'hôte la
-      sert. C'est pourquoi cette page vit ici. Les pages légales d'Undersnake sont sur
-      <a href="https://undersnake.lunqolabs.com/privacy.html">undersnake.lunqolabs.com</a>,
-      celles de Backspace dans <code>lunqolabs/backspace</code>.
-    </p>
+    <p><span data-t="footContact">Une question, un bug ?</span> <a href="mailto:contact@lunqolabs.com">contact@lunqolabs.com</a></p>
+    <p class="tech" data-t="footTech"></p>
   </footer>
 
 </div>
+
+<script>
+(function () {
+  var SITE = 'https://lunqolabs.com';
+  var CHEMINS = {
+    fr: { home:'/fr', work:'/fr/realisations', item:'/fr/realisations/', devis:'/fr/devis' },
+    en: { home:'/en', work:'/en/work',         item:'/en/work/',         devis:'/en/quote' },
+    es: { home:'/es', work:'/es/proyectos',    item:'/es/proyectos/',    devis:'/es/presupuesto' },
+    pt: { home:'/pt', work:'/pt/projetos',     item:'/pt/projetos/',     devis:'/pt/orcamento' },
+    it: { home:'/it', work:'/it/progetti',     item:'/it/progetti/',     devis:'/it/preventivo' }
+  };
+  var NOMS = { fr:'FR', en:'EN', es:'ES', pt:'PT', it:'IT' };
+
+  var T = {
+    fr: {
+      titre:"Lunqo Labs — Undersnake, Backspace et nos autres produits",
+      desc:"Lunqo Labs, studio indépendant : web apps, applis mobiles et jeux vidéo. Undersnake est sur Google Play.",
+      heroOver:"Nouveau sur Google Play",
+      heroLead:"Un serpent qui creuse. La coulée te traque dans tes propres tunnels.",
+      heroSub:"Tu ne manges pas de pommes : tu descends. Et derrière toi, la coulée se déverse dans les tunnels que tu viens d'ouvrir.",
+      n1:"24 mondes", n2:"480 niveaux", n3:"Descente infinie", n4:"Jouable hors ligne",
+      btnPlay:"Télécharger sur Google Play", btnWeb:"Jouer dans le navigateur",
+      secProdOver:"Nos produits",
+      secProdTitre:"Des produits utilisés tous les jours.",
+      secProdChapo:"Chaque projet a sa page sur le site du studio : le défi de départ, ce qu'on a construit, et ce que ça a changé.",
+      secSoonOver:"Bientôt",
+      secSoonTitre:"Ce qui arrive sur vos téléphones.",
+      secSoonChapo:"Trois produits en cours, déjà jouables ou utilisables en interne.",
+      catMobile:"Appli mobile", catGame:"Jeu vidéo", catWeb:"Web app", soon:"Bientôt",
+      lienPlay:"Google Play", lienJouer:"Jouer en ligne", lienProjet:"Voir le projet",
+      dBackspace:"Libérez de l'espace en un swipe. Le nettoyage photo qui prend des minutes, pas des soirées.",
+      dOrbgrid:"Conquiers la grille. Un jeu de stratégie à réactions en chaîne, en solo ou jusqu'à 4 joueurs.",
+      dValorio:"RH, présence à la demi-journée, TJM, facturation et marges : tout ce que gérait un Google Sheet, fiabilisé et automatisé.",
+      dShotOrbi:"Vise, rebondis sur les parois et touche toutes les cibles avant la fin du chrono. Un jeu de puzzle, de tir et de temps.",
+      dNovaRush:"Un jeu d'arcade spatial : touche les éclats, gemmes et bonus avant qu'ils filent, monde après monde.",
+      dPdfQuill:"Tous vos PDF dans votre poche : scanner, fusionner, alléger, signer. Hors ligne, rien n'est envoyé.",
+      studioTitre:"Studio indépendant : web apps, applis mobiles et jeux vidéo.",
+      studioTexte:"De la maquette à la publication sur les stores. Premier appel gratuit, réponse sous 24 h, et une estimation honnête.",
+      studioCta1:"Voir tous les projets", studioCta2:"Demander un devis",
+      footContact:"Une question, un bug ?",
+      footTech:"Cette racine sert aussi app-ads.txt, le fichier qui dit aux annonceurs qui a le droit de vendre l'espace publicitaire de nos applications. Les robots partent du site déclaré dans la fiche Play Store, puis remontent à la racine de l'hôte."
+    },
+    en: {
+      titre:"Lunqo Labs — Undersnake, Backspace and our other products",
+      desc:"Lunqo Labs, an independent studio: web apps, mobile apps and video games. Undersnake is on Google Play.",
+      heroOver:"New on Google Play",
+      heroLead:"A snake that digs down. The flow hunts you through your own tunnels.",
+      heroSub:"You don't eat apples — you dig. And behind you, the flow pours into the tunnels you just opened.",
+      n1:"24 worlds", n2:"480 levels", n3:"Endless descent", n4:"Plays offline",
+      btnPlay:"Get it on Google Play", btnWeb:"Play in your browser",
+      secProdOver:"Our products",
+      secProdTitre:"Products people use every day.",
+      secProdChapo:"Every project has its own page on the studio site: the problem we started from, what we built, and what changed.",
+      secSoonOver:"Soon",
+      secSoonTitre:"What's coming to your phone.",
+      secSoonChapo:"Three products in progress, already playable or in use internally.",
+      catMobile:"Mobile app", catGame:"Video game", catWeb:"Web app", soon:"Soon",
+      lienPlay:"Google Play", lienJouer:"Play online", lienProjet:"View project",
+      dBackspace:"Free up space with a swipe. Photo cleanup that takes minutes, not evenings.",
+      dOrbgrid:"Take the grid. A chain-reaction strategy game, solo or up to four players.",
+      dValorio:"HR, half-day attendance, day rates, invoicing and margins: everything a spreadsheet used to hold, made reliable and automatic.",
+      dShotOrbi:"Aim, bounce off the walls and hit every target before the clock runs out. A game of puzzle, aim and time.",
+      dNovaRush:"A space arcade game: tap shards, gems and bonuses before they slip away, world after world.",
+      dPdfQuill:"Every PDF in your pocket: scan, merge, shrink, sign. Offline — nothing is uploaded.",
+      studioTitre:"An independent studio: web apps, mobile apps and video games.",
+      studioTexte:"From mockup to store release. First call is free, we answer within a day, and the estimate is honest.",
+      studioCta1:"See every project", studioCta2:"Request a quote",
+      footContact:"A question, a bug?",
+      footTech:"This root also serves app-ads.txt, the file that tells advertisers who may sell our apps' ad space. Crawlers start from the website declared in the Play Store listing, then go up to the host root."
+    },
+    es: {
+      titre:"Lunqo Labs — Undersnake, Backspace y nuestros otros productos",
+      desc:"Lunqo Labs, estudio independiente: web apps, apps móviles y videojuegos. Undersnake ya está en Google Play.",
+      heroOver:"Novedad en Google Play",
+      heroLead:"Una serpiente que excava. La riada te caza por tus propios túneles.",
+      heroSub:"No comes manzanas: excavas. Y detrás de ti, la riada se cuela por los túneles que acabas de abrir.",
+      n1:"24 mundos", n2:"480 niveles", n3:"Descenso infinito", n4:"Funciona sin conexión",
+      btnPlay:"Descargar en Google Play", btnWeb:"Jugar en el navegador",
+      secProdOver:"Nuestros productos",
+      secProdTitre:"Productos que se usan todos los días.",
+      secProdChapo:"Cada proyecto tiene su página en la web del estudio: el reto inicial, lo que construimos y qué cambió.",
+      secSoonOver:"Pronto",
+      secSoonTitre:"Lo que llega a tu teléfono.",
+      secSoonChapo:"Tres productos en marcha, ya jugables o en uso interno.",
+      catMobile:"App móvil", catGame:"Videojuego", catWeb:"Web App", soon:"Pronto",
+      lienPlay:"Google Play", lienJouer:"Jugar online", lienProjet:"Ver el proyecto",
+      dBackspace:"Libera espacio con un deslizamiento. La limpieza de fotos que lleva minutos, no noches enteras.",
+      dOrbgrid:"Conquista la cuadrícula. Un juego de estrategia de reacciones en cadena, solo o hasta 4 jugadores.",
+      dValorio:"RR. HH., presencia por media jornada, tarifas diarias, facturación y márgenes: todo lo que llevaba una hoja de cálculo, fiable y automático.",
+      dShotOrbi:"Apunta, rebota en las paredes y alcanza todos los objetivos antes de que acabe el tiempo. Un juego de puzle, puntería y tiempo.",
+      dNovaRush:"Un juego arcade espacial: toca fragmentos, gemas y bonus antes de que se escapen, mundo tras mundo.",
+      dPdfQuill:"Todos tus PDF en el bolsillo: escanear, unir, aligerar, firmar. Sin conexión, no se envía nada.",
+      studioTitre:"Estudio independiente: web apps, apps móviles y videojuegos.",
+      studioTexte:"Del boceto a la publicación en las tiendas. Primera llamada gratis, respuesta en 24 h y una estimación honesta.",
+      studioCta1:"Ver todos los proyectos", studioCta2:"Pedir presupuesto",
+      footContact:"¿Una duda, un error?",
+      footTech:"Esta raíz también sirve app-ads.txt, el archivo que indica a los anunciantes quién puede vender el espacio publicitario de nuestras apps. Los robots parten de la web declarada en la ficha de Play Store y suben a la raíz del host."
+    },
+    pt: {
+      titre:"Lunqo Labs — Undersnake, Backspace e os nossos outros produtos",
+      desc:"Lunqo Labs, estúdio independente: web apps, apps móveis e videojogos. Undersnake já está no Google Play.",
+      heroOver:"Novidade no Google Play",
+      heroLead:"Uma cobra que cava. A torrente te caça pelos seus próprios túneis.",
+      heroSub:"Você não come maçãs: você cava. E atrás de você, a torrente escorre pelos túneis que acabou de abrir.",
+      n1:"24 mundos", n2:"480 níveis", n3:"Descida infinita", n4:"Funciona offline",
+      btnPlay:"Baixar no Google Play", btnWeb:"Jogar no navegador",
+      secProdOver:"Os nossos produtos",
+      secProdTitre:"Produtos usados todos os dias.",
+      secProdChapo:"Cada projeto tem a sua página no site do estúdio: o desafio inicial, o que construímos e o que mudou.",
+      secSoonOver:"Em breve",
+      secSoonTitre:"O que está a caminho do seu telefone.",
+      secSoonChapo:"Três produtos em curso, já jogáveis ou em uso interno.",
+      catMobile:"App móvel", catGame:"Videojogo", catWeb:"Web App", soon:"Em breve",
+      lienPlay:"Google Play", lienJouer:"Jogar online", lienProjet:"Ver o projeto",
+      dBackspace:"Liberte espaço com um deslize. A limpeza de fotos que demora minutos, não noites.",
+      dOrbgrid:"Conquista a grelha. Um jogo de estratégia de reações em cadeia, a solo ou até 4 jogadores.",
+      dValorio:"RH, presença por meio dia, valor/dia, faturação e margens: tudo o que uma folha de cálculo geria, agora fiável e automático.",
+      dShotOrbi:"Aponta, faz ricochete nas paredes e acerta em todos os alvos antes de o tempo acabar. Um jogo de puzzle, pontaria e tempo.",
+      dNovaRush:"Um jogo arcade espacial: toca em fragmentos, gemas e bónus antes que desapareçam, mundo após mundo.",
+      dPdfQuill:"Todos os seus PDF no bolso: digitalizar, juntar, aliviar, assinar. Offline, nada é enviado.",
+      studioTitre:"Estúdio independente: web apps, apps móveis e videojogos.",
+      studioTexte:"Da maquete à publicação nas lojas. Primeira chamada gratuita, resposta em 24 h e uma estimativa honesta.",
+      studioCta1:"Ver todos os projetos", studioCta2:"Pedir orçamento",
+      footContact:"Uma dúvida, um erro?",
+      footTech:"Esta raiz serve também o app-ads.txt, o ficheiro que diz aos anunciantes quem pode vender o espaço publicitário das nossas apps. Os robôs partem do site declarado na ficha da Play Store e sobem até à raiz do anfitrião."
+    },
+    it: {
+      titre:"Lunqo Labs — Undersnake, Backspace e gli altri nostri prodotti",
+      desc:"Lunqo Labs, studio indipendente: web app, app mobile e videogiochi. Undersnake è su Google Play.",
+      heroOver:"Novità su Google Play",
+      heroLead:"Un serpente che scava. La colata ti insegue nei tuoi stessi tunnel.",
+      heroSub:"Non mangi mele: scavi. E dietro di te la colata si riversa nei tunnel che hai appena aperto.",
+      n1:"24 mondi", n2:"480 livelli", n3:"Discesa infinita", n4:"Funziona offline",
+      btnPlay:"Scarica su Google Play", btnWeb:"Gioca nel browser",
+      secProdOver:"I nostri prodotti",
+      secProdTitre:"Prodotti usati tutti i giorni.",
+      secProdChapo:"Ogni progetto ha la sua pagina sul sito dello studio: la sfida di partenza, cosa abbiamo costruito e cosa è cambiato.",
+      secSoonOver:"Presto",
+      secSoonTitre:"Cosa arriva sul tuo telefono.",
+      secSoonChapo:"Tre prodotti in corso, già giocabili o in uso interno.",
+      catMobile:"App mobile", catGame:"Videogioco", catWeb:"Web App", soon:"Presto",
+      lienPlay:"Google Play", lienJouer:"Gioca online", lienProjet:"Vedi il progetto",
+      dBackspace:"Libera spazio con uno swipe. La pulizia delle foto che richiede minuti, non serate.",
+      dOrbgrid:"Conquista la griglia. Un gioco di strategia a reazioni a catena, da solo o fino a 4 giocatori.",
+      dValorio:"HR, presenze a mezza giornata, tariffe giornaliere, fatturazione e margini: tutto quello che stava in un foglio di calcolo, reso affidabile e automatico.",
+      dShotOrbi:"Mira, rimbalza sulle pareti e colpisci tutti i bersagli prima che scada il tempo. Un gioco di puzzle, mira e tempo.",
+      dNovaRush:"Un gioco arcade spaziale: tocca schegge, gemme e bonus prima che scappino, mondo dopo mondo.",
+      dPdfQuill:"Tutti i tuoi PDF in tasca: scansionare, unire, alleggerire, firmare. Offline, non viene inviato nulla.",
+      studioTitre:"Studio indipendente: web app, app mobile e videogiochi.",
+      studioTexte:"Dal mockup alla pubblicazione sugli store. Prima chiamata gratuita, risposta entro 24 h e una stima onesta.",
+      studioCta1:"Vedi tutti i progetti", studioCta2:"Chiedere un preventivo",
+      footContact:"Una domanda, un bug?",
+      footTech:"Questa radice serve anche app-ads.txt, il file che dice agli inserzionisti chi può vendere lo spazio pubblicitario delle nostre app. I crawler partono dal sito dichiarato nella scheda Play Store e risalgono alla radice dell'host."
+    }
+  };
+
+  function choisir() {
+    var q = new URLSearchParams(location.search).get('lang');
+    if (q && T[q]) return q;
+    try { var m = localStorage.getItem('lunqo.lang'); if (m && T[m]) return m; } catch (e) {}
+    var liste = navigator.languages || [navigator.language || 'fr'];
+    for (var i = 0; i < liste.length; i++) {
+      var code = String(liste[i]).slice(0, 2).toLowerCase();
+      if (T[code]) return code;
+    }
+    return 'en';
+  }
+
+  function appliquer(lang) {
+    var d = T[lang] || T.fr;
+    var c = CHEMINS[lang] || CHEMINS.fr;
+
+    document.documentElement.lang = lang;
+    document.title = d.titre;
+    var md = document.querySelector('meta[name="description"]');
+    if (md) md.setAttribute('content', d.desc);
+
+    document.querySelectorAll('[data-t]').forEach(function (el) {
+      var v = d[el.getAttribute('data-t')];
+      if (typeof v === 'string') el.textContent = v;
+    });
+
+    document.getElementById('lienMarque').href = SITE + c.home;
+    document.getElementById('lienProjets').href = SITE + c.work;
+    document.getElementById('lienDevis').href = SITE + c.devis;
+    document.querySelectorAll('[data-site]').forEach(function (a) {
+      a.href = SITE + c.item + a.getAttribute('data-site');
+    });
+
+    document.querySelectorAll('[data-img]').forEach(function (im) {
+      var dispo = im.getAttribute('data-langs');
+      var l = dispo ? (dispo.split(',').indexOf(lang) >= 0 ? lang : 'en') : lang;
+      var src = 'img/' + im.getAttribute('data-img') + '-' + l + '-' + im.getAttribute('data-n') + '.webp';
+      if (im.getAttribute('src') !== src) im.setAttribute('src', src);
+    });
+
+    document.querySelectorAll('#langues button').forEach(function (b) {
+      b.setAttribute('aria-current', b.dataset.lang === lang ? 'true' : 'false');
+    });
+
+    try { localStorage.setItem('lunqo.lang', lang); } catch (e) {}
+  }
+
+  var nav = document.getElementById('langues');
+  Object.keys(NOMS).forEach(function (code) {
+    var b = document.createElement('button');
+    b.type = 'button';
+    b.dataset.lang = code;
+    b.textContent = NOMS[code];
+    b.setAttribute('lang', code);
+    b.addEventListener('click', function () { appliquer(code); });
+    nav.appendChild(b);
+  });
+
+  appliquer(choisir());
+})();
+</script>
+
 </body>
 </html>
